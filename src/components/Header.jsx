@@ -2,11 +2,31 @@ import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { useLogoutMutation } from '../slices/usersApiSlice';
+import { logout } from '../slices/authSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+
+
 
 const Header = () => {
-  const  userInfo  = '';
+  const { userInfo } = useSelector((state) => state.auth);
+  const userId = userInfo?.userId;
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [logoutApiCall] = useLogoutMutation();
+
   const logoutHandler = async () => {
-    console.log('logout')
+    try {
+      await logoutApiCall({ userId }).unwrap();
+      dispatch(logout());
+      navigate('/login');
+      toast.info("Logged Out Successful")
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (

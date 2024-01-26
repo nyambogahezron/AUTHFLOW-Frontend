@@ -4,6 +4,10 @@ import FormContainer from '../components/FormContainer';
 import Loader from '../components/Loader';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRegisterMutation } from '../slices/usersApiSlice';
+import { setCredentials } from '../slices/authSlice';
+
 
 const RegisterScreen = () => {
   const [name, setName] = useState('');
@@ -11,8 +15,40 @@ const RegisterScreen = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [register, { isLoading }] = useRegisterMutation();
+
+  const { userInfo } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate('/');
+    }
+  }, [navigate, userInfo]);
+
   const submitHandler = async (e) => {
     e.preventDefault();
+
+    if (password !== confirmPassword) {
+      toast.error('Passwords do not match');
+    } else {
+      try {
+        const res = await register({ name, email, password }).unwrap();
+        // dispatch(setCredentials({ ...res.user }));
+         toast.info(res.msg)
+        navigate('/verify-email');
+      } catch (err) {
+        console.log(err)
+        if (err.data.msg == 'Please provide Name,Please provide email,Please provide password'){
+          toast.error('Please enter all fields');
+        } else{
+
+        toast.error(err?.data?.msg || err.error);
+      }
+      }
+    }
   };
   return (
     <FormContainer>
@@ -62,6 +98,7 @@ const RegisterScreen = () => {
         </Button>
 
       </Form>
+       {isLoading && <Loader />}
 
       <Row className='py-3'>
         <Col>

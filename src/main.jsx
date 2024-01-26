@@ -15,7 +15,11 @@ import RegisterScreen from './screens/RegisterScreen.jsx';
 import ProfileScreen from './screens/ProfileScreen.jsx';
 import ResetPasswordScreen from './screens/ResetPasswordScreen.jsx';
 import ForgotPasswordScreen from './screens/ForgotPasswordScreen.jsx';
+import VerifyEmailScreen from './screens/VerifyEmailScreen.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx';
+
+import store from './store';
+import { Provider } from 'react-redux'; 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,12 +30,15 @@ const router = createBrowserRouter(
       <Route path='/reset-password' element={<ResetPasswordScreen />} />
       <Route path='/forgot-password' element={<ForgotPasswordScreen />} />
       <Route path='/profile' element={<ProfileScreen />} />
+      <Route path='/verify-email' element={<VerifyEmailScreen />} />
     </Route>
   )
 );
 
 ReactDOM.createRoot(document.getElementById('root')).render(
+    <Provider store={store}>
     <React.StrictMode>
       <RouterProvider router={router} />
     </React.StrictMode>
+    </Provider>
 );
