@@ -25,7 +25,7 @@ const ResetPasswordScreen = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    try {
+      try {
       const res = await resetpassword({
         email,
         token: code,

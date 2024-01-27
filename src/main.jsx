@@ -15,6 +15,7 @@ import RegisterScreen from './screens/RegisterScreen.jsx';
 import ProfileScreen from './screens/ProfileScreen.jsx';
 import ResetPasswordScreen from './screens/ResetPasswordScreen.jsx';
 import ForgotPasswordScreen from './screens/ForgotPasswordScreen.jsx';
+import UpdatePasswordScreen from './screens/UpdatePassword.jsx';
 import VerifyEmailScreen from './screens/VerifyEmailScreen.jsx';
 import PrivateRoute from './components/PrivateRoute.jsx';
 
@@ -31,6 +32,7 @@ const router = createBrowserRouter(
       <Route path='/forgot-password' element={<ForgotPasswordScreen />} />
       <Route path='/profile' element={<ProfileScreen />} />
       <Route path='/verify-email' element={<VerifyEmailScreen />} />
+      <Route path='/update-password' element={<UpdatePasswordScreen />} />
     </Route>
   )
 );

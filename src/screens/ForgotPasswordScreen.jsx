@@ -23,8 +23,6 @@ const ForgotPasswordScreen = () => {
     e.preventDefault();
     try {
       const res = await forgotpassword({ email }).unwrap();
-      // dispatch(setCredentials({ ...res.user }));
-
       navigate("/reset-password");
       toast.info(res.msg);
     } catch (err) {
