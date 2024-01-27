@@ -8,7 +8,7 @@ export default defineConfig({
     proxy: {
       '/api': {
         target: 'https://auth-flow-api-3e9v.onrender.com',
-        changeOrigin: true,
+        changeOrigin: false,
       },
     },
   },
