@@ -7,7 +7,7 @@ export default defineConfig({
     server: {
     proxy: {
       '/api': {
-        target: 'https://auth-flow-api-3e9v.onrender.com',
+        'https://deploy-test-k0b3.onrender.com',
         changeOrigin: true,
       },
     },
