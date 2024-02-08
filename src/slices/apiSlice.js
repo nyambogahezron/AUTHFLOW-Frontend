@@ -1,6 +1,6 @@
 import { fetchBaseQuery, createApi } from '@reduxjs/toolkit/query/react';
 
-const baseQuery = fetchBaseQuery({ baseUrl: 'https://deploy-test-k0b3.onrender.com' });
+const baseQuery = fetchBaseQuery({ baseUrl: 'https://auth-flow-api-3e9v.onrender.com' });
 
 export const apiSlice = createApi({
   baseQuery,
